@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Uploaded Tracks</h2>
+
+<div class="row">
+  {% for track in tracks %}
+  <div class="col-md-6">
+    <div class="card bg-secondary text-white mb-4">
+      <div class="card-body">
+        <h5 class="card-title">{{ track.title }}</h5>
+        <p class="card-text">
+          <strong>Team:</strong> {{ track.team }}<br>
+          <strong>Genre:</strong> {{ track.genre }} | <strong>Year:</strong> {{ track.year }}
+        </p>
+        <audio id="player-{{ track.id }}" controls class="w-100 mb-2">
+          <source src="{{ url_for('static', filename='uploads/' + track.file_path) }}" type="audio/mp3">
+        </audio>
+        <button class="btn btn-sm btn-warning" onclick="loopAudio('player-{{ track.id }}', 30, 45)">
+          Loop Drop (30s–45s)
+        </button>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function loopAudio(playerId, start, end) {
+  const audio = document.getElementById(playerId);
+  audio.currentTime = start;
+  audio.play();
+  const loop = setInterval(() => {
+    if (audio.currentTime >= end) {
+      audio.currentTime = start;
+    }
+  }, 250);
+}
+</script>
+{% endblock %}

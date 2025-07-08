@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Upload New Track</h2>
+
+<form method="POST" enctype="multipart/form-data" class="bg-secondary text-white p-4 rounded">
+  <div class="mb-3">
+    <label class="form-label">Track Title</label>
+    <input type="text" class="form-control" name="title" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Team</label>
+    <input type="text" class="form-control" name="team" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Genre</label>
+    <select class="form-select" name="genre" required>
+      <option selected disabled>Select genre</option>
+      <option value="Raas">Raas</option>
+      <option value="Bhangra">Bhangra</option>
+      <option value="Fusion">Fusion</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Year</label>
+    <input type="number" class="form-control" name="year" min="2000" max="2100" required>
+  </div>
+
+  <hr class="border-light">
+
+  <div class="mb-3">
+    <label class="form-label">Upload MP3 File</label>
+    <input type="file" class="form-control" name="audio" accept=".mp3">
+    <div class="form-text text-light">Or use a YouTube link below.</div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">YouTube Link (optional)</label>
+    <input type="url" class="form-control" name="youtube_url" placeholder="https://youtube.com/watch?v=...">
+  </div>
+
+  <button type="submit" class="btn btn-success">Upload</button>
+</form>
+{% endblock %}
